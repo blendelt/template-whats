@@ -1,74 +1,146 @@
-function criarBarra(var_nome, var_avatar) {
-    // Verificar se o elemento pai existe
-    const elementoPai = document.getElementsByTagName("typebot-standard")[0]?.shadowRoot?.querySelector('.typebot-container');
-    if (!elementoPai) {
-        console.error("Elemento pai não encontrado!");
-        return;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta Comercial</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Estilos em JavaScript
+            const style = document.createElement('style');
+            style.textContent = `
+                /* Estilização da barra de topo */
+                .top-bar {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #f5f5f5;
+                    color: #333;
+                    text-align: center;
+                    font-size: 14px;
+                    padding: 10px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    z-index: 1000;
+                }
 
-    // Criar a barra do usuário
-    const userBar = document.createElement("div");
-    userBar.className = "user-bar";
-    userBar.style.cssText = `
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #f1f1f1;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    `;
+                /* Container principal */
+                .container {
+                    margin-top: 60px; /* Espaço para a barra fixa */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px;
+                }
 
-    // Botão de voltar
-    const backButton = document.createElement("button");
-    backButton.innerText = "Voltar";
-    backButton.style.cssText = `
-        border: none;
-        background-color: transparent;
-        color: #007bff;
-        cursor: pointer;
-        font-size: 16px;
-    `;
-    backButton.addEventListener("click", () => {
-        window.location.href = "https://www.google.com"; // Redirecionar para o Google
-    });
+                /* Input de envio */
+                .input-container {
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid #ccc;
+                    border-radius: 20px;
+                    padding: 10px;
+                    width: 100%;
+                    max-width: 400px;
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 20px; /* Espaço entre componentes */
+                }
 
-    // Avatar
-    const avatar = document.createElement("div");
-    avatar.style.cssText = `
-        display: flex;
-        align-items: center;
-    `;
-    avatar.innerHTML = `<img src="${var_avatar}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">`;
+                .input-container input {
+                    flex: 1;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                    padding: 5px;
+                }
 
-    // Nome e Status
-    const name = document.createElement("div");
-    name.innerHTML = `
-        <strong>${var_nome}</strong><br>
-        <span style="font-size: 12px; color: gray;">Online</span>
-    `;
+                .input-container button {
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    font-size: 16px;
+                    color: #007bff;
+                }
 
-    avatar.appendChild(name);
+                .input-container button:hover {
+                    color: #0056b3;
+                }
 
-    // Ações (Exemplo: Telefone e Anexo)
-    const actions = document.createElement("div");
-    actions.style.cssText = `
-        display: flex;
-        gap: 10px;
-    `;
-    actions.innerHTML = `
-        <button style="border: none; background-color: transparent; cursor: pointer;">
-            📞
-        </button>
-        <button style="border: none; background-color: transparent; cursor: pointer;">
-            📷
-        </button>
-    `;
+                /* Estilização dos botões principais */
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #007bff;
+                    border: none;
+                    border-radius: 5px;
+                    text-align: center;
+                    text-decoration: none;
+                    cursor: pointer;
+                    margin: 10px;
+                }
 
-    // Montar a barra
-    userBar.appendChild(backButton);
-    userBar.appendChild(avatar);
-    userBar.appendChild(actions);
+                .button:hover {
+                    background-color: #0056b3;
+                }
 
-    // Adicionar ao topo do container
-    elementoPai.prepend(userBar);
-}
+                .button.red {
+                    background-color: #dc3545;
+                }
+
+                .button.red:hover {
+                    background-color: #a71d2a;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Estrutura HTML
+            const body = document.body;
+
+            // Barra fixa no topo
+            const topBar = document.createElement('div');
+            topBar.className = 'top-bar';
+            topBar.textContent = 'Conta Comercial';
+            body.appendChild(topBar);
+
+            // Container principal
+            const container = document.createElement('div');
+            container.className = 'container';
+            body.appendChild(container);
+
+            // Input de envio
+            const inputContainer = document.createElement('div');
+            inputContainer.className = 'input-container';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Escreva sua mensagem...';
+
+            const button = document.createElement('button');
+            button.textContent = 'Enviar';
+
+            inputContainer.appendChild(input);
+            inputContainer.appendChild(button);
+            container.appendChild(inputContainer);
+
+            // Botões principais
+            const configButton = document.createElement('a');
+            configButton.className = 'button';
+            configButton.href = '#';
+            configButton.textContent = 'Configurações';
+
+            const deleteButton = document.createElement('a');
+            deleteButton.className = 'button red';
+            deleteButton.href = '#';
+            deleteButton.textContent = 'Excluir Conta';
+
+            container.appendChild(configButton);
+            container.appendChild(deleteButton);
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
