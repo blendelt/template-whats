@@ -4,7 +4,7 @@ function criarBarra(var_nome, var_avatar) {
 const css = `
    .typebot-chat-view {
     padding-top: 70px;
-    gap: 20px; /* Ajuste o valor de acordo com o espaçamento desejado entre as mensagens */
+    gap: 10px; /* Ajuste o valor de acordo com o espaçamento desejado entre as mensagens */
   }
 
   div > div.typebot-chat-view.scroll-smooth.gap-2 > div > div > div.flex.flex-col.flex-1.gap-2 > div { 
